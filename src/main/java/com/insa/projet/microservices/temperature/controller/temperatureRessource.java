@@ -24,7 +24,7 @@ public class temperatureRessource {
 		return db.getListSensors();
 	}
 
-	@GetMapping("list")
+	@GetMapping("/list")
 	public List<TemperatureSensor> getListSensors() {
 		for (int i = 0; i < db.getListSensors().size(); i++) {
 			System.out.println(db.getListSensors().get(i));
