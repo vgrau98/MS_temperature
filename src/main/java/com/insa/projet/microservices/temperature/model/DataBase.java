@@ -19,12 +19,18 @@ public class DataBase {
 		this.listSensors = listSensors;
 	}
 	
+	//n number of room. One sensor per room + one outdoor
 	public void initDataBase(int n){
 		
 		this.listSensors.clear();
+		
+		//Outdoor sensor
+		this.listSensors.add(new TemperatureSensor(0, -1));
+	
 		for(int i=0;i<n;i++) {
-			this.listSensors.add(new TemperatureSensor(i, i+100));
+			this.listSensors.add(new TemperatureSensor(i+1, i+100));
 		}
+
 		
 	}
 	
