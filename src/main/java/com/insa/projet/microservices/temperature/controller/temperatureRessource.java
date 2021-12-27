@@ -71,7 +71,7 @@ public class temperatureRessource {
 	public void addValueSensorRoom(@PathVariable("room") int room, @RequestBody SensorValue value) {
 		int index = -1;
 		for (int i = 0; i < db.getListSensors().size(); i++) {
-			if (db.getListSensors().get(i).getId() == room) {
+			if (db.getListSensors().get(i).getRoom() == room) {
 				index = i;
 			}
 		}
