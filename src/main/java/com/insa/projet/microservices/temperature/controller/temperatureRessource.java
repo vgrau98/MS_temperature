@@ -55,11 +55,23 @@ public class temperatureRessource {
 		return db.getListSensors().get(index);
 	}
 
-	@PostMapping(path = "addValue/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public void addValueSensor(@PathVariable("id") int id, @RequestBody SensorValue value) {
+	@PostMapping(path = "addValueID/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public void addValueSensorID(@PathVariable("id") int id, @RequestBody SensorValue value) {
 		int index = -1;
 		for (int i = 0; i < db.getListSensors().size(); i++) {
 			if (db.getListSensors().get(i).getId() == id) {
+				index = i;
+			}
+		}
+
+		db.getListSensors().get(index).addValue(value);
+	}
+	
+	@PostMapping(path = "addValueRoom/{room}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public void addValueSensorRoom(@PathVariable("room") int room, @RequestBody SensorValue value) {
+		int index = -1;
+		for (int i = 0; i < db.getListSensors().size(); i++) {
+			if (db.getListSensors().get(i).getId() == room) {
 				index = i;
 			}
 		}
