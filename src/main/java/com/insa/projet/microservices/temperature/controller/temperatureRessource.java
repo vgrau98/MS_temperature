@@ -55,7 +55,7 @@ public class temperatureRessource {
 		return db.getListSensors().get(index);
 	}
 	
-	@PostMapping("/addSensor")
+	@PostMapping(path="/addSensor", consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE)
 	public void addTemperatureSensor(@RequestBody TemperatureSensor sensor) {
 		db.getListSensors().add(sensor);
 	}
