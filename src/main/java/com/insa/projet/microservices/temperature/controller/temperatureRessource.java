@@ -56,7 +56,7 @@ public class temperatureRessource {
 	}
 	
 	@PostMapping("/addSensor")
-	public void TemperatureSensor(@RequestBody TemperatureSensor sensor) {
+	public void addTemperatureSensor(@RequestBody TemperatureSensor sensor) {
 		db.getListSensors().add(sensor);
 	}
 	
