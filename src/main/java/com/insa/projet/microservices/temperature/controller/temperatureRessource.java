@@ -67,7 +67,7 @@ public class temperatureRessource {
 	
 	
 
-	@PostMapping(path = "addValueID/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(path = "addValueID/{id}",consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public void addValueSensorID(@PathVariable("id") int id, @RequestBody SensorValue value) {
 		int index = -1;
 		for (int i = 0; i < db.getListSensors().size(); i++) {
