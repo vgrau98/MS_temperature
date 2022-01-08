@@ -60,10 +60,25 @@ public class temperatureRessource {
 		return db.sensorIsCreatedID(ID);
 	}
 	
+	@GetMapping("/isMeasured/{id}/{timestamp}")
+	public boolean alreadyMeasured(@PathVariable ("id") int id,@PathVariable ("timestamp") long timestamp) {
+		
+		boolean measured=false;
+		TemperatureSensor sensor = getTemperatureSensorID(id);
+		for(SensorValue v : sensor.getValues()) {
+			if(v.getTimestamp()==timestamp) {
+				measured=true;
+			}
+		}
+		return measured;
+	}
+	
+	
 	@PostMapping(path="/addSensor", consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE)
 	public void addTemperatureSensor(@RequestBody TemperatureSensor sensor) {
 		db.getListSensors().add(sensor);
 	}
+	
 	
 	
 
