@@ -12,17 +12,21 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+/**
+ * 
+ * @author grau
+ * Expose resources for managing a database of temperature sensors each with an ID, a room and a list of values representing the history. 
+ */
 @RestController
 public class temperatureRessource {
 
 	public DataBase db = new DataBase();
 
-	@PostMapping(path = "init/{n}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<TemperatureSensor> initDataBase(@PathVariable int n) {
-		db.initDataBase(n);
-		return db.getListSensors();
-	}
 
+	/**
+	 * 
+	 * @return the list of temperature sensors
+	 */
 	@GetMapping("/list")
 	public List<TemperatureSensor> getListSensors() {
 		for (int i = 0; i < db.getListSensors().size(); i++) {
@@ -31,6 +35,12 @@ public class temperatureRessource {
 		return db.getListSensors();
 	}
 
+	
+	/**
+	 * 
+	 * @param id
+	 * @return a temperature sensor according to its id
+	 */
 	@GetMapping("/id/{id}")
 	public TemperatureSensor getTemperatureSensorID(@PathVariable("id") int id) {
 
@@ -43,6 +53,11 @@ public class temperatureRessource {
 		return db.getListSensors().get(index);
 	}
 
+	/**
+	 * 
+	 * @param room
+	 * @return a temperature sensor according to its room
+	 */
 	@GetMapping("/room/{room}")
 	public TemperatureSensor getTemperatureSensorRoom(@PathVariable("room") int room) {
 
@@ -55,11 +70,22 @@ public class temperatureRessource {
 		return db.getListSensors().get(index);
 	}
 	
+	/**
+	 * 
+	 * @param ID
+	 * @return true if a sensor with the id exists. False otherwise
+	 */
 	@GetMapping("/sensorInID/{id}")
 	public boolean sensorInDBbyID(@PathVariable ("id") int ID) {
 		return db.sensorIsCreatedID(ID);
 	}
 	
+	/**
+	 * 
+	 * @param id
+	 * @param timestamp
+	 * @return true if a value for a specific sensor has already been measured
+	 */
 	@GetMapping("/isMeasured/{id}/{timestamp}")
 	public boolean alreadyMeasured(@PathVariable ("id") int id,@PathVariable ("timestamp") long timestamp) {
 		
@@ -73,7 +99,10 @@ public class temperatureRessource {
 		return measured;
 	}
 	
-	
+	/**
+	 * 
+	 * @param sensor, see class TemperatureSensor
+	 */
 	@PostMapping(path="/addSensor", consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE)
 	public void addTemperatureSensor(@RequestBody TemperatureSensor sensor) {
 		db.getListSensors().add(sensor);
@@ -81,7 +110,11 @@ public class temperatureRessource {
 	
 	
 	
-
+	/**
+	 * 
+	 * @param id, sensor id
+	 * @param value, see SensorValue class
+	 */
 	@PostMapping(path = "addValueID/{id}",consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public void addValueSensorID(@PathVariable("id") int id, @RequestBody SensorValue value) {
 		int index = -1;
@@ -94,6 +127,11 @@ public class temperatureRessource {
 		db.getListSensors().get(index).addValue(value);
 	}
 	
+	/**
+	 * 
+	 * @param room, sensor room. In our system we have one sensor by room
+	 * @param value, 
+	 */
 	@PostMapping(path = "addValueRoom/{room}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public void addValueSensorRoom(@PathVariable("room") int room, @RequestBody SensorValue value) {
 		int index = -1;

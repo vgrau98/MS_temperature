@@ -3,13 +3,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+/**
+ * 
+ * @author grau
+ * This class allows to implement a temperature sensor
+ */
 public class TemperatureSensor {
 	
 	private int id;
 	private int room;
 	private List<SensorValue> values;
 	
-	
+	/**
+	 * 
+	 * @param id
+	 * @param room
+	 */
 	public TemperatureSensor(int id, int room) {
 		this.id = id;
 		this.room = room;

@@ -1,10 +1,22 @@
 package com.insa.projet.microservices.temperature.model;
 
+/**
+ * 
+ * @author grau
+ * This class allows to implement a sensor value
+ */
 public class SensorValue {
 	private double value;
 	private String unit;
 	private long timestamp;
 	
+	
+	/**
+	 * 
+	 * @param value
+	 * @param timestamp
+	 * @param unit
+	 */
 	public SensorValue(double value, long timestamp, String unit) {
 
 		this.value = value;
